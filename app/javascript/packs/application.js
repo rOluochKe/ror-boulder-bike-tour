@@ -17,5 +17,6 @@ require("channels")
 // const imagePath = (name) => images(name, true)
 
 require("custom/pages")
+require("custom/countdown")
 import 'bootstrap'
 import './src/application.scss'
