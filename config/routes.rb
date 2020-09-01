@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'pages#home'
-  get '/photos' => 'pages#photo'
+  get '/gallery' => 'pages#gallery'
   get '/riders' => 'pages#rider'
-  get '/slogan' => 'pages#slogan'
+  get '/location' => 'pages#location'
+  resources :contests, only: [:new, :create, :index]
 end

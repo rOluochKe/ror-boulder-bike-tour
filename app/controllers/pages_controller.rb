@@ -1,9 +1,11 @@
 class PagesController < ApplicationController
   def home; end
 
-  def photo; end
+  def galllery; end
 
   def rider; end
 
-  def slogan; end
+  def location; end
+
+  def contest; end
 end

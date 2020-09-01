@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="offset-md-2 col-md-8 space-up mb-5">
+      <h2 class="mb-4">View already submitted SLOGANS</h2>
+        <table class="table table-striped">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Email Address</th>
+              <th scope="col">Slogan</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @contests.each do |contest| %>
+              <tr>
+                <td><%= link_to contest.first_name %></td>
+                <td><%= link_to contest.last_name %></td>
+                <td><%= link_to contest.email %></td>
+                <td><%= link_to contest.slogan %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+    </div>
+  </div>
+</div>

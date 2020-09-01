@@ -10355,3 +10355,19 @@ body {
 .footer {
   padding: 5rem 0;
 }
+
+/* new styles */
+
+nav#mainNav {
+  background-color: black !important;
+}
+
+.space-up {
+  margin-top: 140px;
+}
+
+.alert {
+  border: 1px solid #000 !important;
+  background-color: #28a745 !important;
+  color: #fff !important;
+}
