@@ -3,8 +3,6 @@ class PagesController < ApplicationController
 
   def galllery; end
 
-  def rider; end
-
   def location; end
 
   def contest; end
