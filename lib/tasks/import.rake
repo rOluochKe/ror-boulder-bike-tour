@@ -6,7 +6,7 @@ namespace :import do
     data = Roo::Spreadsheet.open('lib/rider_data.xlsx') # open spreadsheet
     headers = data.row(1) # get header row
     data.each_with_index do |row, idx|
-      next if idx == 0 # skip header row
+      next if idx.zero? # skip header row
 
       # create hash from headers and cells
       riders_data = Hash[[headers, row].transpose]
