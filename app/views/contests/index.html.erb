@@ -15,10 +15,10 @@
           <tbody>
             <% @contests.each do |contest| %>
               <tr>
-                <td><%= link_to contest.first_name %></td>
-                <td><%= link_to contest.last_name %></td>
-                <td><%= link_to contest.email %></td>
-                <td><%= link_to contest.slogan %></td>
+                <td><%= contest.first_name %></td>
+                <td><%= contest.last_name %></td>
+                <td><%= contest.email %></td>
+                <td><%= contest.slogan %></td>
               </tr>
             <% end %>
           </tbody>

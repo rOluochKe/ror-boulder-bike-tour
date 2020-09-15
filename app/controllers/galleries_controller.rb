@@ -1,5 +1,3 @@
 class GalleriesController < ApplicationController
-  def index
-    @riders = Rider.all
-  end
+  def index; end
 end
