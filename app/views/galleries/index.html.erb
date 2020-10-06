@@ -1,1 +1,161 @@
-Testing...
+  <style>
+    img {
+      width: 250px !important;
+      height: auto !important;
+    }
+  </style>
+  
+  <div id="container">
+    <div id="main" role="main">
+
+      <div id="Gallery" class="gallery">
+        <div id="main-image"></div>
+            
+        <ul id="thumb"></ul>
+      </div>
+
+      <!-- PAGER -->
+      <div class="hyperlink-pager hyperlink-pager-top">
+        <div id="page-summary"></div>
+        <div id="page-links"></div>
+      </div>
+    
+    </div>
+  </div>
+
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+
+<script> 
+
+(function ($) {
+	
+	String.prototype.format = function (col) {
+		var format = function (str, col) {
+			col = typeof col === 'object' ? col : Array.prototype.slice.call(arguments, 1);
+
+			return str.replace(/\{([^}]+)\}/gm, function () {
+				return col[arguments[1]];
+			});
+		};
+		
+		return format(this,col);
+	}
+
+	function PagnationStr(totalPgs, currentPg) {
+		var pageSet = 10,
+			indexUrl = "",
+			tmp = "<div id=\"pagination\"><ul>",
+			maxpage = currentPg + 9,
+			crtarget = currentPg,
+			i = 0,
+			cssclass,pno;
+
+		// Previous Link
+		tmp += (currentPg > 1) ?
+				("<li class='previous'><span data-page='" + indexUrl + (currentPg - 1) +
+				   "' title=\"Move One Page Back\">&laquo; Previous</span></li>") :
+				("<li class='previous-off'>&laquo; Previous</li>");
+
+		// Pagination Loop
+		if (maxpage > totalPgs && maxpage > 10){ crtarget = crtarget - 9; }
+
+		for (i = crtarget; i < maxpage; i++) {
+			cssclass = (currentPg === i) ? " class=\"currentpage\" " : "";
+			pno = i > 1 ? i.toString() : "";
+		
+			if (i < 1){ i = 1; }
+			if (i > totalPgs){ break; }
+				
+			tmp += ("<li><span data-page='" + indexUrl + pno + "'" + cssclass + ">" + i + "</span></li>");
+			if (pageSet < 1){ break; }
+			pageSet--;
+		}
+
+		
+		// NEXT LINK
+		tmp += ((totalPgs > 1) && (currentPg + 1 < totalPgs)) ?
+				("<li class='next'><span data-page='" + indexUrl + (currentPg + 1) +
+					"' title=\"Move One Page Forward\">Next &raquo;</span></li>") :
+				("<li class='next-off'>Next &raquo;</li>");
+				
+		tmp += ("</ul></div>");
+		return tmp;
+	}
+
+	var opt = { 
+		"page" : window.name || 1,
+		"APIKEY" : "7053559669c657f7f7f37ba6593f98e7", /*YOUR FLICKR API KEY */
+		"flickrImg" : "http://farm{farm-id}.static.flickr.com/{server-id}/{id}_{secret}_[mstzb].jpg",
+		"flickrJson" : "http://api.flickr.com/services/rest/?method=flickr.photos.search&tags=bikerace&api_key={APIKEY}&extras=url_sq%2C+url_m&per_page={PPPG}&page={PG}&format=json&jsoncallback=?",
+		"picsPerPage" : 12,
+		"stringMsg" : [{
+						"ERROR_NoPics" : "Sorry No Pictures Could Be Loaded",
+						"PAGE_SUMMARY" : "Page {X} of {Y}"
+						}]
+		},
+		uri = opt.flickrJson.format({APIKEY : opt.APIKEY, PPPG : opt.picsPerPage, PG : opt.page  } ),
+		ele = function(e){ return document.getElementById(e) || undefined; };
+
+	function displayImages(data) {
+		if(data.stat === "ok"){
+
+			var currentPage = data.photos.page,
+				pages = data.photos.pages,
+				perPage = data.photos.perpage,
+				totalPhotos = data.photos.total,
+				htmlString = "",
+				mainImage = ele("main-image"),
+				thumbEle = ele("thumb");
+
+				ele("page-summary").innerHTML = opt.stringMsg[0].PAGE_SUMMARY.format({X:currentPage,Y:pages});
+
+				function setImage(photo){
+					var mS = mainImage.style;
+					mS.backgroundImage = "url(" + photo.url_m +")";
+					mS.height = photo.height_m +"px";
+					mS.width = photo.width_m + "px";
+				}
+				
+				$.setImage = setImage;
+				
+				$.each(data.photos.photo, function(i,item){
+						if(i === perPage-1) setImage(data.photos.photo[0]);
+						htmlString += '<li>\
+						<img src="' + item.url_sq + '" title="' + item.title + '" data-img="' + item.url_m + '" data-imgwidth="' + item.width_m + '" data-imgheight="' + item.height_m + '"\/><\/li>';
+				});
+
+			ele("page-links").innerHTML = PagnationStr(pages, currentPage);
+
+			thumbEle.innerHTML = htmlString;
+
+			$(thumbEle).children("li").each(function(){
+				$(this).click(function(){ 
+					var child = $(this).children("img");
+					$.setImage(
+						{
+							url_m : child.attr("data-img"),
+							width_m : child.attr("data-imgwidth"),
+							height_m : child.attr("data-imgheight")
+					});
+				});
+			});
+		}else{
+			if(data.stat === "fail"){
+				alert(opt.stringMsg[0].ERROR_NoPics);
+			}
+		}
+		
+		$('#pagination span').bind('click', function(){
+			opt.page = $(this).attr("data-page");
+			window.name = opt.page;
+			uri = opt.flickrJson.format({APIKEY : opt.APIKEY, PPPG : opt.picsPerPage, PG : opt.page});
+			$.getJSON(uri, displayImages);
+		});		
+	}
+	
+	$.getJSON(uri, displayImages);
+
+})(jQuery);
+</script> 

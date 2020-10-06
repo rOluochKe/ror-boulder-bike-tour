@@ -18,5 +18,6 @@ require("channels")
 require("custom/pages")
 require("custom/countdown")
 require("custom/scripts")
+require("custom/flickr")
 import 'bootstrap'
 import './src/application.scss'
