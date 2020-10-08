@@ -3,7 +3,9 @@ class PagesController < ApplicationController
 
   def galllery; end
 
-  def location; end
+  def location
+    @riders = Rider.all
+  end
 
   def contest; end
 end

@@ -1,28 +1,70 @@
   <style>
+		#main-image {
+			height: 100% !important;
+			width: auto !important;
+			background-repeat: no-repeat !important;
+			background-size: contain !important;
+		}
+
     img {
-      width: 250px !important;
+      width: 300px !important;
       height: auto !important;
     }
+
+		.gallery {
+			margin-top: 130px;
+		}
+
+		ul#thumb {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			list-style: none;
+		}
+
+		#thumb li {
+			padding-bottom: 5px;
+		}
+
+		.hashtugs {
+			font-size: 20px;
+			text-align: center;
+			font-weight: bold;
+		}
+
   </style>
   
-  <div id="container">
-    <div id="main" role="main">
+	<div class="container-fluid">
+  	<div class="row">
+    	<div class="col-md-12">
 
-      <div id="Gallery" class="gallery">
-        <div id="main-image"></div>
-            
-        <ul id="thumb"></ul>
-      </div>
+				<div id="container-fluid">
+					<div id="main" role="main">
 
-      <!-- PAGER -->
-      <div class="hyperlink-pager hyperlink-pager-top">
-        <div id="page-summary"></div>
-        <div id="page-links"></div>
-      </div>
-    
-    </div>
-  </div>
+						<div id="Gallery" class="gallery">
+							<div class="row">
+								<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+									<div id="main-image"></div>
+								</div>
 
+								<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+									<ul id="thumb"></ul>
+								</div>
+							</div>
+						</div>
+
+						<!-- PAGER -->
+						<div class="hyperlink-pager hyperlink-pager-top">
+							<div id="page-summary"></div>
+							<div id="page-links"></div>
+						</div>
+					
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
 
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
@@ -46,7 +88,7 @@
 	function PagnationStr(totalPgs, currentPg) {
 		var pageSet = 10,
 			indexUrl = "",
-			tmp = "<div id=\"pagination\"><ul>",
+			tmp = "<div id=\"pagination\"><ul class='pagination'>",
 			maxpage = currentPg + 9,
 			crtarget = currentPg,
 			i = 0,
@@ -54,9 +96,9 @@
 
 		// Previous Link
 		tmp += (currentPg > 1) ?
-				("<li class='previous'><span data-page='" + indexUrl + (currentPg - 1) +
+				("<li class='page-item previous'><span class='page-link' data-page='" + indexUrl + (currentPg - 1) +
 				   "' title=\"Move One Page Back\">&laquo; Previous</span></li>") :
-				("<li class='previous-off'>&laquo; Previous</li>");
+				("<li class='page-item previous-off'>&laquo; Previous</li>");
 
 		// Pagination Loop
 		if (maxpage > totalPgs && maxpage > 10){ crtarget = crtarget - 9; }
@@ -68,7 +110,7 @@
 			if (i < 1){ i = 1; }
 			if (i > totalPgs){ break; }
 				
-			tmp += ("<li><span data-page='" + indexUrl + pno + "'" + cssclass + ">" + i + "</span></li>");
+			tmp += ("<li class='page-item'><span class='page-link' data-page='" + indexUrl + pno + "'" + cssclass + ">" + i + "</span></li>");
 			if (pageSet < 1){ break; }
 			pageSet--;
 		}
@@ -76,9 +118,9 @@
 		
 		// NEXT LINK
 		tmp += ((totalPgs > 1) && (currentPg + 1 < totalPgs)) ?
-				("<li class='next'><span data-page='" + indexUrl + (currentPg + 1) +
+				("<li class='page-item next'><span class='page-link' data-page='" + indexUrl + (currentPg + 1) +
 					"' title=\"Move One Page Forward\">Next &raquo;</span></li>") :
-				("<li class='next-off'>Next &raquo;</li>");
+				("<li class='page-item next-off'>Next &raquo;</li>");
 				
 		tmp += ("</ul></div>");
 		return tmp;
@@ -86,10 +128,10 @@
 
 	var opt = { 
 		"page" : window.name || 1,
-		"APIKEY" : "7053559669c657f7f7f37ba6593f98e7", /*YOUR FLICKR API KEY */
+		"APIKEY" : "7053559669c657f7f7f37ba6593f98e7",
 		"flickrImg" : "http://farm{farm-id}.static.flickr.com/{server-id}/{id}_{secret}_[mstzb].jpg",
 		"flickrJson" : "http://api.flickr.com/services/rest/?method=flickr.photos.search&tags=bikerace&api_key={APIKEY}&extras=url_sq%2C+url_m&per_page={PPPG}&page={PG}&format=json&jsoncallback=?",
-		"picsPerPage" : 12,
+		"picsPerPage" : 42,
 		"stringMsg" : [{
 						"ERROR_NoPics" : "Sorry No Pictures Could Be Loaded",
 						"PAGE_SUMMARY" : "Page {X} of {Y}"
@@ -122,8 +164,8 @@
 				
 				$.each(data.photos.photo, function(i,item){
 						if(i === perPage-1) setImage(data.photos.photo[0]);
-						htmlString += '<li>\
-						<img src="' + item.url_sq + '" title="' + item.title + '" data-img="' + item.url_m + '" data-imgwidth="' + item.width_m + '" data-imgheight="' + item.height_m + '"\/><\/li>';
+						htmlString += '<li class="page-item">\
+						<img src="' + item.url_sq + '" title="' + item.title + '" data-img="' + item.url_m + '" data-imgwidth="' + item.width_m + '" data-imgheight="' + item.height_m + '"\/><p class="hashtugs">#bikerace #BoulderBikeTour</p><\/li>';
 				});
 
 			ele("page-links").innerHTML = PagnationStr(pages, currentPage);

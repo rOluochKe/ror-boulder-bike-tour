@@ -15,5 +15,13 @@
  *= require_self
  */
 
-@import './flickr';
 @import './styles.css';
+
+nav#mainNav {
+  margin-bottom: 100px;
+}
+
+.flash-container {
+  position: absolute;
+  top: 100px;
+}

@@ -22,3 +22,5 @@ namespace :import do
     end
   end
 end
+
+# Run this command to import to database rails import:rider_data
