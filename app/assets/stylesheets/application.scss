@@ -25,3 +25,13 @@ nav#mainNav {
   position: absolute;
   top: 100px;
 }
+
+@media screen and (max-width: 991px) {
+  #mainNav .navbar-brand {
+    color: #fff;
+  }
+
+  .navbar-light .navbar-nav .nav-link {
+    color: #fff !important;
+  }
+}
