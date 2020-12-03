@@ -15,8 +15,18 @@ require("channels")
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-require("custom/pages")
-require("custom/countdown")
-require("custom/scripts")
+// require("../custom/scripts")
+require("../custom/pages")
+require("../custom/countdown")
+
+// require("../custom/gmaps")
+
+require('./maps')
+
+require("./maps/index")
+
 import 'bootstrap'
 import './src/application.scss'
+
+
+

@@ -22,10 +22,9 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem 'rack-cors', '~> 0.4.0'
-# gem 'httparty'
-# gem 'figaro'
 gem 'httparty'
 gem 'roo', '~> 2.8.0'
+gem 'geocoder'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
@@ -34,8 +33,6 @@ gem 'roo', '~> 2.8.0'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.5'
 gem 'hirb', '~> 0.7.3'
-# gem 'geocoder'
-# gem 'gmaps4rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
