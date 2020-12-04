@@ -9,16 +9,16 @@ class Rider < ApplicationRecord
 
   def to_feature
     {
-      "type": "Feature",
+      "type": 'Feature',
       "geometry": {
-        "type": "Point",
+        "type": 'Point',
         "coordinates": coordinates
       },
       "properties": {
         "rider_id": id,
         "name": name,
         "info_window": ApplicationController.new.render_to_string(
-          partial: "riders/infowindow",
+          partial: 'riders/infowindow',
           locals: { rider: self }
         )
       }

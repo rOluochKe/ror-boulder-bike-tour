@@ -5,9 +5,10 @@ class RidersController < ApplicationController
   end
 
   private
+
   def build_geojson
     {
-      type: "FeatureCollection",
+      type: 'FeatureCollection',
       features: @riders.map(&:to_feature)
     }
   end

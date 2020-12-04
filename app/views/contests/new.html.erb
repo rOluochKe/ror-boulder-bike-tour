@@ -3,6 +3,7 @@
     <div class="offset-md-2 col-md-8 space-up mb-5">
       <h2 class="mb-4">Submit your SLOGAN to win the contest!</h2>
         <%= form_for @contest do |f| %>
+          <%= render "shared/error_messages", resource: @contest %>
           <div class="form-group">
             <%= f.label :first_name %>
             <%= f.text_field :first_name, class: 'form-control' %>

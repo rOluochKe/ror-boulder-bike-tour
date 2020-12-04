@@ -18,6 +18,8 @@
 @import './styles.css';
 @import './map.scss';
 
+$state-danger-text: #f0140c;
+
 nav#mainNav {
   margin-bottom: 100px;
 }
@@ -34,5 +36,20 @@ nav#mainNav {
 
   .navbar-light .navbar-nav .nav-link {
     color: #fff !important;
+  }
+}
+
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .has-error !optional;
+  .form-control {
+    color: $state-danger-text;
   }
 }
