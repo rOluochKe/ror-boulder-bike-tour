@@ -1,6 +1,8 @@
 class RidersController < ApplicationController
   def index
-    @riders = Rider.all.where.not(latitude: nil, longitude: nil)
+    @riders = Rider.all
+    
+    @riders = Rider.where.not(latitude: nil, longitude: nil)
     @geojson = build_geojson
   end
 

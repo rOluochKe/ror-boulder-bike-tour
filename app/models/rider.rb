@@ -4,7 +4,7 @@ class Rider < ApplicationRecord
   end
 
   def coordinates
-    [longitude, latitude]
+    [latitude, longitude]
   end
 
   def to_feature
@@ -15,7 +15,7 @@ class Rider < ApplicationRecord
         "coordinates": coordinates
       },
       "properties": {
-        "rider_id": id,
+        "id": id,
         "name": name,
         "info_window": ApplicationController.new.render_to_string(
           partial: 'riders/infowindow',
