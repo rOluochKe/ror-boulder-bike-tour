@@ -3,6 +3,8 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
+import { initMapbox } from './maps/map';
+
 require("@rails/ujs").start()
 require("turbolinks").start()
 require("@rails/activestorage").start()
@@ -15,18 +17,13 @@ require("channels")
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-// require("../custom/scripts")
+document.addEventListener('turbolinks:load', () => {
+  initMapbox();
+});
+
 require("../custom/pages")
 require("../custom/countdown")
 
-// require("../custom/gmaps")
-
-require('./maps')
-
-require("./maps/index")
-
 import 'bootstrap'
 import './src/application.scss'
-
-
 

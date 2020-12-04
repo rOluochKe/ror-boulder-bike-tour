@@ -16,6 +16,7 @@
  */
 
 @import './styles.css';
+@import './map.scss';
 
 nav#mainNav {
   margin-bottom: 100px;
@@ -34,8 +35,4 @@ nav#mainNav {
   .navbar-light .navbar-nav .nav-link {
     color: #fff !important;
   }
-}
-
-#map {
-  height: 400px;
 }

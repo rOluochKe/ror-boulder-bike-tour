@@ -10,6 +10,7 @@
     "imports-loader": "^1.2.0",
     "jquery": "3.5.1",
     "lodash": "^4.17.20",
+    "mapbox-gl": "^1.13.0",
     "popper.js": "^1.16.1",
     "turbolinks": "^5.2.0"
   },
