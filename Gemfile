@@ -24,6 +24,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'dotenv-rails'
 gem 'httparty'
 gem 'rack-cors', '~> 0.4.0'
+gem 'responders'
 gem 'roo', '~> 2.8.0'
 
 # Use Active Storage variant
