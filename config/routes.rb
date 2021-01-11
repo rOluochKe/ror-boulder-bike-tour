@@ -1,3 +1,7 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  root 'pages#home'
+  get '/gallery' => 'galleries#index'
+  get '/riders' => 'riders#index'
+  get '/location' => 'riders#location'
+  resources :contests, only: [:new, :create, :index]
 end

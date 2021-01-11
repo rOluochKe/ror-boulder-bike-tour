@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: ror_boulder_bike_tour_development
+  database: boulder_bike_tour_development
   username: postgres
   password: postgres
   host: localhost
@@ -60,7 +60,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: ror_boulder_bike_tour_test
+  database: boulder_bike_tour_test
   username: postgres
   password: postgres
   host: localhost

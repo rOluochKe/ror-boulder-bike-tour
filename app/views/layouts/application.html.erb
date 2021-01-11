@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html class="h-100">
   <head>
-    <title>RorBoulderBikeTour</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <title>Boulder Bike Tour - Rocky Mountains, Colorado Edition</title>
+    <%= render 'layouts/rails_default' %>
   </head>
 
-  <body>
+  <body id="page-top">
+    <%= render 'layouts/header' %>
+    <%= render 'layouts/flash' %>
     <%= yield %>
+    <%= render 'layouts/footer' %>
   </body>
 </html>

@@ -1,0 +1,26 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="offset-md-2 col-md-8 all-riders">
+      <h1 class="text-center">All Riders</h1>
+        <ul class="list-unstyled mt-4">
+          <% @riders.each do |rider| %>
+            <li class="mb-3">
+              <div class="card bg-light">
+                <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <h5><strong>Full Name: </strong> <%= rider.first_name %> <%= rider.last_name %></h5>
+                        <p><strong>City of Origin: </strong> <%= rider.city_of_origin %></p>
+                      </div>
+                      <div class="col-md-6">
+                        <p><strong>State of Origin: </strong><%= rider.state_of_origin %></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </li>
+          <% end %>
+        </ul>
+    </div>
+  </div>
+</div>

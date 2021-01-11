@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="offset-md-2 col-md-8 space-up mb-5">
+      <h2 class="mb-4">Submit your SLOGAN to win the contest!</h2>
+        <%= form_for @contest do |f| %>
+          <%= render "shared/error_messages", resource: @contest %>
+          <div class="form-group">
+            <%= f.label :first_name %>
+            <%= f.text_field :first_name, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :last_name %>
+            <%= f.text_field :last_name, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :email %>
+            <%= f.text_field :email, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :slogan %>
+            <%= f.text_area :slogan, class: 'form-control', :cols => 10, :rows => 5 %>
+          </div>
+          <div class="form-group">
+            <%= f.submit "Submit Contest", class: 'btn btn-primary' %>
+          </div>
+        <% end %>
+    </div>
+  </div>
+</div>
