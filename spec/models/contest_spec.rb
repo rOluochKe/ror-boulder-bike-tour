@@ -1,39 +1,95 @@
 require 'rails_helper'
 
 RSpec.describe Contest, type: :model do
-  let(:slogan_one) { Contest.create(slogan: 'valid test slogan') }
+  it 'has first name' do
+    contest = Contest.new(
+      first_name: '',
+      last_name: 'Doe',
+      email: 'john.doe@gmail.com',
+      slogan: 'Testing contest slogan by users'
+    )
+    expect(contest).to_not be_valid
 
-  context 'validations tests' do
-    it 'ensures the first_name is present' do
-      contest = Contest.new(first_name: 'John')
-      expect(contest.valid?).to eq(false)
-    end
+    contest.first_name = 'John'
+    expect(contest).to be_valid
+  end
 
-    it 'ensures the last_name is present' do
-      contest = Contest.new(last_name: 'Doe')
-      expect(contest.valid?).to eq(false)
-    end
+  it 'has last name' do
+    contest = Contest.new(
+      first_name: 'John',
+      last_name: '',
+      email: 'john.doe@gmail.com',
+      slogan: 'Testing contest slogan by users'
+    )
+    expect(contest).to_not be_valid
 
-    it 'ensures the email is present' do
-      contest = Contest.new(email: 'john.doe@gmail.com')
-      expect(contest.valid?).to eq(false)
-    end
+    contest.last_name = 'Doe'
+    expect(contest).to be_valid
+  end
 
-    it 'ensures the slogan is present' do
-      contest = Contest.new(slogan: 'Testing slogan')
-      expect(contest.valid?).to eq(false)
-    end
+  it 'has email' do
+    contest = Contest.new(
+      first_name: 'John',
+      last_name: 'Doe',
+      email: '',
+      slogan: 'Testing contest slogan by users'
+    )
+    expect(contest).to_not be_valid
 
-    it 'is invalid if length is less than 10 characters' do
-      slogan_one.slogan = 'te'
-      slogan_one.valid?
-      expect(slogan_one.errors[:slogan]).to include('is too short (minimum is 10 characters)')
-    end
+    contest.email = 'john.doe@gmail.com'
+    expect(contest).to be_valid
+  end
 
-    it 'is invalid if length is more than 50 characters' do
-      slogan_one.slogan = 'a' * 52
-      slogan_one.valid?
-      expect(slogan_one.errors[:slogan]).to include('is too long (maximum is 50 characters)')
-    end
+  it 'has slogan' do
+    contest = Contest.new(
+      first_name: 'John',
+      last_name: 'Doe',
+      email: 'john.doe@gmail.com',
+      slogan: ''
+    )
+    expect(contest).to_not be_valid
+
+    contest.slogan = 'Testing contest slogan by users'
+    expect(contest).to be_valid
+  end
+
+  it 'must have at least 10 chars in slogan' do
+    contest = Contest.new(
+      first_name: 'John',
+      last_name: 'Doe',
+      email: 'john.doe@gmail.com',
+      slogan: ''
+    )
+
+    contest.slogan = 'a' * 8
+    expect(contest).not_to be_valid
+  end
+
+  it 'must have at least 10 chars in slogan' do
+    contest = Contest.new(
+      first_name: 'John',
+      last_name: 'Doe',
+      email: 'john.doe@gmail.com',
+      slogan: ''
+    )
+
+    contest.slogan = 'a' * 8
+    expect(contest).not_to be_valid
+  end
+
+  it 'must have fewer than 50 chars in username' do
+    contest = Contest.new(
+      first_name: 'John',
+      last_name: 'Doe',
+      email: 'john.doe@gmail.com',
+      slogan: ''
+    )
+
+    contest.slogan = 'a' * 52
+    expect(contest).not_to be_valid
+  end
+
+  context 'validations email uniqueness' do
+    it { should validate_uniqueness_of(:email) }
   end
 end
